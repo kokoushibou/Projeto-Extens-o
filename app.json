@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Salão Agenda",
+    "slug": "salao-agendamento",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "sdkVersion": "54.0.0",
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "edgeToEdgeEnabled": true,
+      "package": "com.exemplo.salaoagendamento"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
