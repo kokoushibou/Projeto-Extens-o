@@ -1,93 +1,38 @@
-# Salão Agenda (Expo SDK 54 + TypeScript)
+# AgendaBella (Expo) — App simples de agendamento para salão
 
-App de agendamento para salão (sem login), com persistência local:
-- **SQLite** para dados de domínio.
-- **AsyncStorage** para configurações.
+Aplicativo mobile feito com **Expo + React Native** para organizar **agendamentos**, **clientes** e **serviços** de um salão de beleza, com **armazenamento local** (funciona offline).
 
-## Requisitos
-- Node.js 20+
-- npm 10+
+## Funcionalidades
 
-## Instalação
-```bash
-npm install
-```
+### Agenda
+- Visualizar a **agenda por dia**
+- **Criar agendamento** (cliente + serviço + data/hora + duração + observação)
+- **Editar** agendamento
+- **Cancelar** agendamento (não apaga; muda o status para “Cancelado”)
+- **Regra anti-conflito**: impede agendamentos que batem no mesmo horário (considerando duração)
 
-## Executar
-```bash
-npx expo start
-```
+### Clientes
+- Listar clientes
+- Buscar cliente (nome/telefone)
+- Adicionar / editar / excluir (com confirmação)
 
-Atalhos:
-```bash
-npm run android
-npm run ios
-npm run web
-```
+### Serviços
+- Listar serviços
+- Adicionar / editar / excluir
+- Serviço tem: **nome**, **preço (opcional)** e **duração (min)**
 
-## Estrutura
-```text
-src/
-  db/
-    index.ts
-  repositories/
-    ClientsRepo.ts
-    ServicesRepo.ts
-    AppointmentsRepo.ts
-  screens/
-    AgendaScreen.tsx
-    AppointmentFormScreen.tsx
-    ClientsScreen.tsx
-    ServicesScreen.tsx
-    SettingsScreen.tsx
-  components/
-    ConfirmDialog.tsx
-    EmptyState.tsx
-  utils/
-    datetime.ts
-    overlap.ts
-    settings.ts
-  theme/
-  navigation/
-    BottomTabs.tsx
-    AgendaStack.tsx
-```
+### Configurações
+- Definir **horário de funcionamento** (ex.: 08:00–18:00)
+- Definir **intervalo padrão** (ex.: 30 minutos)
 
-## Navegação
-- Tabs principais: **Agenda | Clientes | Serviços | Config**.
-- A tab Agenda usa um **Native Stack**:
-  - `AgendaScreen` (lista do dia)
-  - `AppointmentFormScreen` (novo/edição/cancelamento)
+## Tecnologias
+- Expo (React Native)
+- TypeScript
+- SQLite (dados: clientes, serviços, agendamentos)
+- AsyncStorage (configurações)
 
-## Banco e migrações
-- `migrate()` roda na inicialização do app.
-- Tabelas: `clients`, `services`, `appointments`, `schema_migrations`.
-- Seed automático de serviços padrão (se `services` estiver vazio):
-  - Corte (R$ 0, 30 min)
-  - Escova (R$ 0, 60 min)
+## Como rodar (Expo Go)
 
-## Fluxo de agendamentos
-- Agenda possui seletor de data e lista de agendamentos do dia.
-- FAB `+` abre formulário de novo agendamento.
-- Toque em um card abre edição.
-- Formulário permite:
-  - selecionar cliente (com busca)
-  - criar **cliente rápido** e já selecionar
-  - selecionar serviço
-  - escolher data/hora
-  - ajustar duração (default do serviço)
-  - adicionar observação
-- Em edição, há botão **Cancelar Agendamento** (status `CANCELED`).
-
-## Regra de conflito (obrigatória)
-Ao salvar um agendamento `ACTIVE`:
-1. calcula `endAt = startAt + durationMinutes`
-2. verifica sobreposição com outros `appointments` `ACTIVE`
-3. em edição, exclui o próprio `id` da verificação
-4. se houver conflito, bloqueia salvamento com alerta **"Conflito de horário"**
-
-## Configurações
-- `src/utils/settings.ts` usa AsyncStorage com defaults:
-  - `openTime: '08:00'`
-  - `closeTime: '18:00'`
-  - `slotInterval: 30`
+1. Instale as dependências:
+   ```bash
+   npm install
