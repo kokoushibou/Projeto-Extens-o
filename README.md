@@ -36,3 +36,20 @@ Aplicativo mobile feito com **Expo + React Native** para organizar **agendamento
 1. Instale as dependências:
    ```bash
    npm install
+
+2. Inicie o projeto
+   ```bash
+   npm expo start
+
+3. No celular:
+   Instale o Expo Go
+   Escaneie o QR Code para abrir o app
+   Dica: se aparecer erro de cache, rode npx expo start -c.
+
+## Estrutura (resumo)
+   - src/screens — telas do app (Agenda, Clientes, Serviços, Config)
+   - src/db — inicialização do SQLite e migrações
+   - src/repositories — CRUD e consultas (clientes, serviços, agendamentos)
+   - src/utils — helpers (datas, validações, conflito)
+   - src/components — componentes reutilizáveis
+
